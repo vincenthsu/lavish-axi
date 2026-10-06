@@ -1,10 +1,10 @@
 <h1 align="center">lavish-axi</h1>
 <p align="center">
-  <a href="https://github.com/kunchenguid/lavish-axi/actions/workflows/ci.yml"
-    ><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/kunchenguid/lavish-axi/ci.yml?style=flat-square&label=ci"
+  <a href="https://github.com/vincenthsu/lavish-axi/actions/workflows/ci.yml"
+    ><img alt="CI" src="https://img.shields.io/github/actions/workflow/status/vincenthsu/lavish-axi/ci.yml?style=flat-square&label=ci"
   /></a>
-  <a href="https://github.com/kunchenguid/lavish-axi/actions/workflows/release-please.yml"
-    ><img alt="Release" src="https://img.shields.io/github/actions/workflow/status/kunchenguid/lavish-axi/release-please.yml?style=flat-square&label=release"
+  <a href="https://github.com/vincenthsu/lavish-axi/actions/workflows/release-please.yml"
+    ><img alt="Release" src="https://img.shields.io/github/actions/workflow/status/vincenthsu/lavish-axi/release-please.yml?style=flat-square&label=release"
   /></a>
   <a href="https://www.npmjs.com/package/lavish-axi"
     ><img alt="npm" src="https://img.shields.io/npm/v/lavish-axi?style=flat-square"
@@ -48,7 +48,7 @@ Lavish Editor is an [AXI](https://axi.md), which means -
 Install the Lavish skill in the [Agent Skills](https://agentskills.io) format with [`npx skills`](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add kunchenguid/lavish-axi --skill lavish
+npx skills add vincenthsu/lavish-axi --skill lavish
 ```
 
 That is the entire setup - no npm install needed.
@@ -116,7 +116,7 @@ To register by hand instead, point any client at the package directory (`npm roo
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | VS Code            | `"chat.pluginLocations": { "<package-dir>": true }` in user settings                                               |
 | Cursor             | link the package dir at `~/.cursor/plugins/local/lavish-axi` (`setup plugin` handles Windows link compatibility)   |
-| GitHub Copilot CLI | `copilot plugin install <package-dir>` (or `copilot plugin install kunchenguid/lavish-axi` straight from the repo) |
+| GitHub Copilot CLI | `copilot plugin install <package-dir>` (or `copilot plugin install vincenthsu/lavish-axi` straight from the repo) |
 
 Codex and ChatGPT install plugins only from marketplace sources, so Codex users should use the session hook above instead.
 Lavish declares no MCP server - the CLI itself is the agent interface - so a plugin install brings the same `lavish` skill, and the skill and plugin are alternatives rather than a stack.
@@ -124,7 +124,7 @@ Lavish declares no MCP server - the CLI itself is the agent interface - so a plu
 ### From source
 
 ```sh
-git clone https://github.com/kunchenguid/lavish-axi.git
+git clone https://github.com/vincenthsu/lavish-axi.git
 cd lavish-axi
 pnpm install --frozen-lockfile
 pnpm run build

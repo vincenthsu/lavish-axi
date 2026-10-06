@@ -993,7 +993,7 @@ test("export command writes a portable HTML file next to the artifact", async ()
       [fileURLToPath(new URL("../bin/lavish-axi.js", import.meta.url)), "export", artifact],
       {
         cwd: fileURLToPath(new URL("..", import.meta.url)),
-        env: { ...process.env, LAVISH_AXI_STATE_DIR: dir, LAVISH_AXI_TELEMETRY: "0" },
+        env: { ...process.env, LAVISH_AXI_STATE_DIR: dir },
         encoding: "utf8",
       },
     );
@@ -1021,7 +1021,7 @@ test("export command treats --out value as an option operand, not the source fil
       [fileURLToPath(new URL("../bin/lavish-axi.js", import.meta.url)), "export", "--out", output, artifact],
       {
         cwd: fileURLToPath(new URL("..", import.meta.url)),
-        env: { ...process.env, LAVISH_AXI_STATE_DIR: dir, LAVISH_AXI_TELEMETRY: "0" },
+        env: { ...process.env, LAVISH_AXI_STATE_DIR: dir },
         encoding: "utf8",
       },
     );
@@ -2874,14 +2874,6 @@ test("setup rejects an unknown action and names both supported ones", async () =
   }
 });
 
-test("telemetry command names are anonymous and do not include file paths", () => {
-  assert.equal(telemetryCommandName(["report.html"]), "open");
-  assert.equal(telemetryCommandName(["poll", "/tmp/secret/report.html"]), "poll");
-  assert.equal(telemetryCommandName(["end", "/tmp/secret/report.html"]), "end");
-  assert.equal(telemetryCommandName(["playbook", "diagram"]), "playbook");
-  assert.equal(telemetryCommandName(["design"]), "design");
-  assert.equal(telemetryCommandName([]), "home");
-});
 
 test("server spawn options detach without inheriting invalid streams", () => {
   const options = createServerSpawnOptions();

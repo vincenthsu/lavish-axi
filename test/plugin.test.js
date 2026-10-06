@@ -113,8 +113,8 @@ test("committed plugin.json stays in sync with package.json", async () => {
 
 test("normalizeRepositoryUrl converts npm git URLs to plain https", () => {
   assert.equal(
-    normalizeRepositoryUrl({ url: "git+https://github.com/kunchenguid/lavish-axi.git" }),
-    "https://github.com/kunchenguid/lavish-axi",
+    normalizeRepositoryUrl({ url: "git+https://github.com/vincenthsu/lavish-axi.git" }),
+    "https://github.com/vincenthsu/lavish-axi",
   );
   assert.equal(normalizeRepositoryUrl("https://example.com/x"), "https://example.com/x");
   assert.equal(normalizeRepositoryUrl(undefined), undefined);

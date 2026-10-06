@@ -71,9 +71,9 @@ test("build copies local design assets for published artifact injection", async 
 test("package metadata matches the GitHub repository used for npm provenance", async () => {
   const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
 
-  assert.equal(packageJson.repository.url, "git+https://github.com/kunchenguid/lavish-axi.git");
-  assert.equal(packageJson.bugs.url, "https://github.com/kunchenguid/lavish-axi/issues");
-  assert.equal(packageJson.homepage, "https://github.com/kunchenguid/lavish-axi#readme");
+  assert.equal(packageJson.repository.url, "git+https://github.com/vincenthsu/lavish-axi.git");
+  assert.equal(packageJson.bugs.url, "https://github.com/vincenthsu/lavish-axi/issues");
+  assert.equal(packageJson.homepage, "https://github.com/vincenthsu/lavish-axi#readme");
 });
 
 test("pnpm lock root importer matches the publish manifest", async () => {
@@ -97,11 +97,3 @@ test("release workflow publishes from the release tag checkout", async () => {
   );
 });
 
-test("release workflow keeps telemetry env during npm publish prepack", async () => {
-  const workflow = await readFile(new URL("../.github/workflows/release-please.yml", import.meta.url), "utf8");
-
-  assert.match(
-    workflow,
-    /run: npm publish --access public --provenance\n\s+if: \$\{\{ steps\.release\.outputs\.release_created \}\}\n\s+env:\n\s+LAVISH_AXI_UMAMI_HOST: https:\/\/a\.kunchenguid\.com\n\s+LAVISH_AXI_UMAMI_WEBSITE_ID: \$\{\{ vars\.LAVISH_AXI_UMAMI_WEBSITE_ID \}\}/,
-  );
-});

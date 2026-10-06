@@ -61,7 +61,6 @@ import { analyzeSelfPaint, SELF_PAINT_WARNING } from "./self-paint.js";
 import { resolveDesignAssetPath, serve } from "./server.js";
 import { canonicalFile, sessionKey, SessionStore } from "./session-store.js";
 import { generateSharePassword } from "./share-password.js";
-import { initDefaultTelemetry } from "./telemetry.js";
 
 const SHARE_VALUE_FLAGS = ["--password", "--token", "--site", "--update-key"];
 const COMMANDS = new Set([
@@ -196,14 +195,6 @@ export async function run(argv) {
   const agent = detectInvokingAgent(process.env);
   const isTopLevelHelp = argv.length === 1 && argv[0] === "--help";
   const command = telemetryCommandName(argv);
-  const telemetry = initDefaultTelemetry({
-    app: "lavish-axi",
-    version: VERSION,
-    platform: process.platform,
-    arch: process.arch,
-  });
-  telemetry.pageview(`/${command}`, { command });
-  try {
     await runAxiCli({
       description: DESCRIPTION,
       version: VERSION,
@@ -231,13 +222,6 @@ export async function run(argv) {
       },
       getCommandHelp: (command) => getCommandHelp(command, { agent }),
     });
-    telemetry.track("command", { command, status: "success" });
-  } catch (error) {
-    telemetry.track("command", { command, status: "error" });
-    throw error;
-  } finally {
-    await telemetry.close(1_000);
-  }
 }
 
 export function collapseHomeDirectory(file, home) {
@@ -264,10 +248,6 @@ export function normalizeArgv(argv) {
   return ["open", ...argv];
 }
 
-export function telemetryCommandName(argv) {
-  const normalized = normalizeArgv(argv);
-  return normalized[0] && !normalized[0].startsWith("-") ? normalized[0] : "home";
-}
 
 export function createHomeOutput({ bin, sessions, includeSessions = true, agent = "generic" }) {
   return {
